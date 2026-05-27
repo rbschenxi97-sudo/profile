@@ -19,10 +19,15 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v5
+      - name: Package site for Pages
+        run: |
+          tar -czf github-pages.tar.gz -C personal_site .
+
+      - name: Upload artifact for Pages
+        uses: actions/upload-artifact@v4
         with:
-          path: 'personal_site'
+          name: github-pages
+          path: github-pages.tar.gz
 
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
